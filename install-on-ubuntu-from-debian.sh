@@ -24,7 +24,7 @@ function install {
     pkg=$MIRROR/${1:0:1}/$1/$file
     wget $pkg
     #dpkg -i $file
-    to_install=$to_install $file
+    to_install="$to_install $file"
 }
 
 function finalize {
@@ -36,7 +36,7 @@ apt-get update
 apt-get upgrade
 
 # be sure to have these essentials
-yes | apt-get install python pyro libjs-jquery
+apt-get install python pyro libjs-jquery --yes
 
 # now, install packages from Debian
 cd /tmp
@@ -58,8 +58,7 @@ install shinken shinken $SHINKEN_VERSION $ARCH
 install shinken shinken-module-broker-livestatus-sqlite $SHINKEN_VERSION $ARCH
 install shinken shinken-module-broker-livestatus $SHINKEN_VERSION $ARCH
 
-#finalize
-echo to_install
+finalize
 
 # clean
 cd ..
