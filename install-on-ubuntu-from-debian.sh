@@ -2,7 +2,8 @@
 
 # Shinken last version installer for Ubuntu 12.04
 
-# This will install required packages, then  fetch Shinken packages from Debian sid (unstable)
+# This will install required packages, then  fetch Shinken packages from
+# Debian sid (unstable)
 # You need to run this as root.
 
 set -e
@@ -13,7 +14,8 @@ MIRROR=http://ftp.ca.debian.org/debian/pool/main
 SHINKEN_VERSION=1.4.2-1
 ARCH=amd64
 
-# store the packages in order to install them in a row (avoid cycle dependencies)
+# store the packages in order to install them in a row
+# (avoid cycle dependencies)
 to_install=
 
 # install name pkg_name version arch
