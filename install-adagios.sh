@@ -17,3 +17,8 @@ pip install django\<1.5 pynag simplejson
 git clone git@github.com:matthieucan/adagios.git
 
 # python manage.py runserver 0.0.0.0:8000
+
+# notes:
+# a few conf parameters to update, like log_file or archive_log_file
+# either update adagios/etc/adagios.conf (nagios_config) to point to Shinken,
+# or create symlink
