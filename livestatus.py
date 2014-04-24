@@ -1,3 +1,5 @@
+import json
+
 class Query(object):
     def __init__(self, datasource):
         self._datasource = datasource
@@ -60,6 +62,30 @@ class Query(object):
             raise ValueError('Limit must be integer, '
                              'got %s instead' % str(type(val)))
     
+    def to_json(self):
+        d = {'datasource': self._datasource,
+             'columns': self._columns,
+             'filters': self._filters,
+             'stats': self._stats,
+             'sorts': self._sorts,
+             'groupby': self._groupby,
+             'column_headers': self._column_headers,
+             'limit': self._limit,
+             }
+        return json.dumps(d)
+
+    def from_json(self, content):
+        """ Warning: will override self attributes. """
+        d = json.loads(content)
+        self._datasource = d['datasource']
+        self._columns = d['columns']
+        self._filters = d['filters']
+        self._stats = d['stats']
+        self._sorts = d['sorts']
+        self._groupby = d['groupby']
+        self.column_headers = d['column_headers']
+        self._limit = d['limit']
+    
     def __repr__(self):
         # datasource
         q = 'GET {0}\n'.format(self._datasource)
@@ -92,4 +118,4 @@ if __name__ == '__main__':
          .groupby('qwe', 'rty')
          .column_headers(True)
          )
-    print(q)
+    print(q.to_json())
